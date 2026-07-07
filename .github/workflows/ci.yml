@@ -1,0 +1,42 @@
+name: FlowTask CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-and-typecheck:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Typecheck shared
+      run: cd shared && npx tsc --noEmit
+      
+    - name: Typecheck frontend
+      run: npm run typecheck --workspace=frontend
+      
+    - name: Lint frontend
+      run: npm run lint --workspace=frontend
+      
+    - name: Typecheck backend
+      run: npm run typecheck --workspace=backend/node-api
+      
+    - name: Lint backend
+      run: npm run lint --workspace=backend/node-api
+
+  # Deployment jobs will go here once infra is provisioned
+  # deploy-frontend: ...
+  # deploy-node-api: ...
