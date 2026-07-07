@@ -3,7 +3,8 @@ import { useTaskStore } from '../../store/taskStore';
 import { TaskCard } from './TaskCard';
 import { TaskModal } from './TaskModal';
 
-import type { Task, TaskStatus, ParseTaskResponse } from '../../types';
+import type { Task, TaskStatus } from '../../types';
+// import type { ParseTaskResponse } from '../../types';
 
 const STATUS_TABS: { value: TaskStatus | 'all'; label: string; emoji: string }[] = [
   { value: 'all',         label: 'All',         emoji: '📋' },
@@ -68,18 +69,19 @@ export const TaskList: React.FC = () => {
     setDraftTask(null);
   };
 
-  const handleVoiceParsed = (data: ParseTaskResponse) => {
-    setEditingTask(null);
-    // Map ParseTaskResponse fields to a partial Task object
-    setDraftTask({
-      title: data.title,
-      due_date: data.due_date,
-      priority: data.priority,
-      tags: data.tags,
-      context: data.context,
-    });
-    setIsModalOpen(true);
-  };
+  // TODO: Re-enable when voice task parsing is connected.
+  // const handleVoiceParsed = (data: ParseTaskResponse) => {
+  //   setEditingTask(null);
+  //   // Map ParseTaskResponse fields to a partial Task object
+  //   setDraftTask({
+  //     title: data.title,
+  //     due_date: data.due_date,
+  //     priority: data.priority,
+  //     tags: data.tags,
+  //     context: data.context,
+  //   });
+  //   setIsModalOpen(true);
+  // };
 
   return (
     <div className="space-y-6 animate-fade-in">

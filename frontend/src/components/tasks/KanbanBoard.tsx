@@ -151,7 +151,8 @@ export const KanbanBoard: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const leaveTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const searchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // TODO: Re-enable when debounced Kanban search is connected.
+  // const searchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Initial fetch
   useEffect(() => {
